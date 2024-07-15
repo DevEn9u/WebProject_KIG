@@ -174,23 +174,78 @@
             </ul>
           </div>
           <div class="login_area">
-            <form>
+	    	<!-- 로그인을 위해 폼값을 전송한 후 만약 조건에 맞는 회원정보가
+		없다면 request 영역에 에러메세지를 저장한 후 현재페이지로 forward한다.
+		request 영역은 forward된 페이지까지는 영역이 공유되므로 아래의 메세지를
+		출력할 수 있다. -->
+<!-- 		<span style="color : red; font-size: 1.2em;"> -->
+<!-- 			<!-- if문 대신 삼항연산자를 통해 분기 -->
+<%-- 			<%= request.getAttribute("LoginErrMsg") == null ? --%>
+<%--  						"" : request.getAttribute("LoginErrMsg") %> --%>
+<!-- 		</span> -->
+		
+		<%
+		/* session 영역에 해당 속성값이 있는지 확인한다.즉 session 영역에
+		저장된 속성이 없다면 로그아웃 상태이므로 로그인 폼을 웹 브라우저에 출력한다. */
+		if (session.getAttribute("user_id") == null) { // 로그인 상태 확인
+			// 로그아웃 상태
+		%>
+			<!-- 로그인 폼의 입력값을 서버로 전송하기 전에 검증하기 위해 정의한 함수.
+			입력값이 빈값인지 확인하여 경고창을 띄워준다. -->
+			<script>
+				function validateForm(form) {
+					/*
+					매개변수로 전달된 DOM을 통해 하위태그인 <input>에 접근 가능.
+					접근시 name 속성값을 사용하고, value는 입력된 값을 가리킨다.
+					*/
+					if (!form.user_id.value) {
+						// 입력된 값이 없으면 경고창을 띄우고...
+						alert("아이디를 입력하세요.");
+						// 입력을 위해 포커스를 이동하고...
+						form.user_id.focus();
+						// submit 이벤트 리스너쪽으로 false를 반환한다.
+						return false;
+					}
+					/* 빈값에 대한 체크는 !(부정연산자)와 아래의 방식 2가지를 모두
+					사용할 수 있다. */
+					if (form.user_pw.value == "") {
+						alert("패스워드를 입력하세요.");
+						form.user_pw.focus();
+						return false;
+					}
+				}
+		
+			</script>
+            <form name="loginFrm" method="post" action="../login/login.do"
+            	onsubmit="return validateForm(this);">
               <fieldset>
                 <legend>로그인</legend>
                 <div class="row input_wrap1">
-                  <input type="text" placeholder="아이디">
+                  <input type="text" name="user_id" placeholder="아이디">
                 </div>
                 <div class="row input_wrap2">
-                  <input type="password" placeholder="비밀번호">
+                  <input type="password" name="user_pw" placeholder="비밀번호">
                 </div>
                 <div class="row3 checkbox_wrap">
                   <input type="checkbox" id="check1" class="blind">
                   <label for="check1">로그인 상태 유지</label>
                 </div>
-                <a href="#" class="login_btn">넥슨ID 로그인</a>
+                <input type="submit" value="로그인" class="login_btn"/>
               </fieldset>
             </form>
           </div>
+          	<%
+			} else { // 로그인 된 상태
+				/*
+				session 영역에 속성값이 있다면 로그인에 성공한 상태이므로 회원의
+				이름과 로그아웃 버튼을 출력한다.
+				*/
+			%>
+				<%= session.getAttribute("UserName") %> 회원님, 로그인하셨습니다.<br />
+				<a href="Logout.jsp">[로그아웃]</a>
+			<% 
+			}
+			%>	
           <ul class="link_wrap">
             <li><a href="register.jsp">회원가입</a></li>
             <li><a href="#">넥슨ID 찾기</a></li>

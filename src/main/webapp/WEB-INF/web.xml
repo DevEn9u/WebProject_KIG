@@ -32,4 +32,16 @@
   	<param-name>OraclePwd</param-name>
   	<param-value>ng1234</param-value>
   </context-param>
+
+
+<!--    <servlet> -->
+<!--    	<servlet-name>RegisterController</servlet-name> -->
+<!--     <servlet-class>membership.RegisterController</servlet-class> -->
+<!--    </servlet> -->
+
+<!--    <servlet-mapping> -->
+<!--     <servlet-name>RegisterController</servlet-name> -->
+<!--     <url-pattern>/register.do</url-pattern> -->
+<!--    </servlet-mapping> -->
+  
 </web-app>

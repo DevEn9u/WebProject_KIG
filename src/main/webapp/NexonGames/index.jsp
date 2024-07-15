@@ -156,7 +156,7 @@
           <li>
             <a href="#">커뮤니티</a>
             <ul class="depth2">
-              <li><a href="free-board.jsp">자유게시판</a></li>
+              <li><a href="../free-board.jsp">자유게시판</a></li>
               <li><a href="qna-board.jsp">QnA</a></li>
               <li><a href="download-board.jsp">자료실</a></li>
             </ul>
