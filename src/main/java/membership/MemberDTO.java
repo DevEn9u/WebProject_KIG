@@ -1,4 +1,4 @@
-package membership;
+package membership; 
 
 public class MemberDTO {
 	private String id;
@@ -7,6 +7,16 @@ public class MemberDTO {
 	private String email;
 	private String phone;
 	
+	public MemberDTO() {}
+	
+	public MemberDTO(String id, String pass, String name, String email, String phone) {
+		super();
+		this.id = id;
+		this.pass = pass;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+	}
 	public String getId() {
 		return id;
 	}

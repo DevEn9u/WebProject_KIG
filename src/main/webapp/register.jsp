@@ -15,7 +15,7 @@
   <meta property="og:description" content="넥슨게임즈">
   <link rel="shortcut icon" href="images/favicon/favicon.ico?v=2">
   <link rel="apple-touch-icon-precomposed" href="images/favicon/favicon.ico?v=2">
-  <title>넥슨게임즈 로그인</title>
+  <title>넥슨게임즈 회원가입</title>
   <link rel="stylesheet" href="css/all.min.css">
   <link rel="stylesheet" href="css/jquery-ui.min.css">
   <link rel="stylesheet" href="css/swiper-bundle.min.css">
@@ -28,33 +28,38 @@
   <script src="js/ui-common.js?v=<?php echo time(); ?>"></script>
   <script type="text/javascript">
   	
-	function validateForm(form) {  // 폼 내용 검증
-    if (form.id.value == "") {
-        alert("아이디를 입력하세요.");
-        form.id.focus();
-        return false;
-    }
-    if (form.pass.value == "") {
-        alert("비밀번호를 입력하세요.");
-        form.pass.focus();
-        return false;
-    }
-    if (form.name.value == "") {
-        alert("이름을 입력하세요.");
-        form.name.focus();
-        return false;
-    }
-    if (form.email.value == "") {
-        alert("이메일을 입력하세요.");
-        form.email.focus();
-        return false;
-    }
-    if (form.tel.value == "") {
-        alert("전화번호를 입력하세요.");
-        form.tel.focus();
-        return false;
-    }
-}
+		function validateForm(form) {  // 폼 내용 검증
+		    if (form.id.value == "") {
+		        alert("아이디를 입력하세요.");
+		        form.id.focus();
+		        return false;
+		    }
+		    if (form.pass.value == "") {
+		        alert("비밀번호를 입력하세요.");
+		        form.pass.focus();
+		        return false;
+		    }
+		    if (form.pass.value != form.pass2.value) {
+		    	alert("비밀번호가 일치하지 않습니다.")
+		    	form.pass.focus();
+		    	return false;
+		    }
+		    if (form.name.value == "") {
+		        alert("이름을 입력하세요.");
+		        form.name.focus();
+		        return false;
+		    }
+		    if (form.email.value == "") {
+		        alert("이메일을 입력하세요.");
+		        form.email.focus();
+		        return false;
+		    }
+		    if (form.tel.value == "") {
+		        alert("전화번호를 입력하세요.");
+		        form.tel.focus();
+		        return false;
+		    }
+		}
 </script>
 </head>
 <body>
@@ -201,13 +206,15 @@
           
           <!-- 회원가입 폼 -->
           <div class="regisetr_wrap">
-          	<form name="registerFrm" method="post" action="../login/register.do"
+          	<form name="registerFrm" method="post" action="./register.do"
           		onsubmit="return validateForm(this);">
 			    아이디 : <input type="text" name="id" placeholder="6-12자 이내의 아이디를 입력해주세요.">
+			    <button type="button" onclick="return validateForm(this);">클릭해 보세요!</button> <br />
 			    비밀번호 : <input type="password" name="pass" placeholder="영문+숫자의 조합으로 8자 이상의 비밀번호를 입력해주세요.">
+			    비밀번호 확인 : <input type="password" name="pass2" placeholder="비밀번호를 다시 입력해주세요.">
 			    이름 : <input type="text" name="name" />
 			    Email : <input type="email" name="email"> <br />
-			    전화번호 : <input type="tel" name="phone"><br />
+			    전화번호 : <input type="tel" name="phone" oninput="formatPhoneNumber(this)" ><br />
 			    <input type="submit" value="회원가입">
 			</form>
           </div>

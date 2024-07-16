@@ -20,7 +20,7 @@ public class DBConnPool {
 		try {
 			Context initCtx = new InitialContext();
 			Context ctx = (Context)initCtx.lookup("jave:comp/env");
-			DataSource source = (DataSource)ctx.lookup("dbcp_myoracle_nexongames");
+			DataSource source = (DataSource)ctx.lookup("dbcp_myoracle");
 			
 			con = source.getConnection();
 			

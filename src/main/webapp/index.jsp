@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="format-detcntion" content="telephone=no">
+  <meta name="format-detection" content="telephone=no">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="PC, 모바일, 콘솔 플랫폼을 아우르는 다양한 장르의 게임을 개발하는 게임 개발사입니다.">
   <meta name="keywords" content="넥슨게임즈">
@@ -96,7 +96,7 @@
       </nav>
       <div class="lang_wrap">
         <a href="#" class="blog"><img src="images/blog_icon.png" alt="블로그"></a>
-        <a class="login" href="login.jsp">로그인</a>
+        <a class="login" href="./login.do">로그인</a>
         <ul class="lang">
           <li><a href="#" class="active">KOR</a></li>
           <li><a href="#" class="eng">ENG</a></li>
