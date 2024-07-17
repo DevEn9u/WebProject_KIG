@@ -47,7 +47,7 @@ public class EditMemberController extends HttpServlet {
 		dto.setPass(pass);
 		dto.setName(name);
 		dto.setEmail(email);
-		dto.setPhone(phone);		
+		dto.setPhone(phone);
 		
 		// DAO를 통해 사용자 정보 가져오기
 		

@@ -109,7 +109,6 @@ public class MemberDAO extends JDBConnect {
 				String phone = rs.getString("phone_number");
 				
 				member = new MemberDTO(id, pass, name, email, phone);
-				System.out.println(member + "###");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
