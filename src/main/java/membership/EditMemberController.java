@@ -22,14 +22,12 @@ public class EditMemberController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		req.getRequestDispatcher("/EditMember.jsp").forward(req, resp);
-	
+
 		String userId = (String) req.getSession().getAttribute("UserId");
 		
 		MemberDTO dto = dao.getMemberById(userId);
 		
 		req.setAttribute("dto", dto);
-		
 		req.getRequestDispatcher("/EditMember.jsp").forward(req, resp);
 	}
 	
