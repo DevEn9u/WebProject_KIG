@@ -215,14 +215,14 @@
           
           <!-- 회원가입 폼 -->
           <div class="regisetr_wrap">
-          	<form name="registerFrm" method="post" action="./register.do"
+          	<form name="registerFrm" method="post" action="./editmember.do"
           		onsubmit="return validateForm(this);">
           		<fieldset>
           		<legend>회원정보 수정 양식</legend>
 				    아이디 : <input type="text" name="id" value="${ dto.id }" readonly="readonly">
 				    비밀번호 : <input type="password" name="pass" value="${ dto.pass }" placeholder="영문+숫자의 조합으로 8자 이상의 비밀번호를 입력해주세요.">
-				    비밀번호 확인 : <input type="password" name="pass" value="${ UserPW }" placeholder="비밀번호를 다시 입력해주세요.">
-				    이름 : <input type="text" name="name" value="${ UserName }" readonly="readonly"/>
+				    비밀번호 확인 : <input type="password" name="pass" placeholder="비밀번호를 다시 입력해주세요.">
+				    이름 : <input type="text" name="name" value="${ dto.name }" readonly="readonly"/>
 				    Email : <input type="email" name="email" value="${ dto.email }" > <br />
 			    	전화번호 : <input type="text" name="phone" oninput="formatPhoneNumber(this)" value="${ dto.phone }" ><br />
 			    	<input type="submit" value="수정하기">
