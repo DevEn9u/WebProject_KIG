@@ -10,30 +10,56 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/editmember.do")
 public class EditMemberController extends HttpServlet {
-
-	private MemberDAO dao;
+	private static final long serialVersionUID = 1L;
 	
+    private MemberDAO dao;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        dao = new MemberDAO(getServletContext());
+    }
+
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-				
-		// 세션에서 현재 사용자 아이디 가져오기
-		String id = (String) req.getSession().getAttribute("id");
-		System.out.println(id);
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		req.getRequestDispatcher("/EditMember.jsp").forward(req, resp);
+	
+		String userId = (String) req.getSession().getAttribute("UserId");
 		
-		// DAO를 통해 사용자 정보 가져오기
-		MemberDTO member = dao.getMemberById(id);
+		MemberDTO dto = dao.getMemberById(userId);
 		
-		// 회원 정보를 request에 저장
-		req.setAttribute("member", member);
+		req.setAttribute("dto", dto);
 		
 		req.getRequestDispatcher("/EditMember.jsp").forward(req, resp);
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		
+		String id = req.getParameter("id");
+		String pass = req.getParameter("pass");
+		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		String phone = req.getParameter("phone");
 		
+		MemberDTO dto = new MemberDTO();
 
+		dto.setId(id);
+		dto.setPass(pass);
+		dto.setName(name);
+		dto.setEmail(email);
+		dto.setPhone(phone);		
+		
+		// DAO를 통해 사용자 정보 가져오기
+		
+		dao.getUserInfo(id);
+//		System.out.println(id);
+		System.out.println(dto.getPhone() + "에디트컨트롤러");
+		
+		
+		req.setAttribute("dto", dto);
+//		req.getRequestDispatcher("/EditMember.jsp").forward(req, resp);
 	}
+	
 }

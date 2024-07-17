@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -174,69 +175,54 @@
             </ul>
           </div>
           <div class="login_area">
-	    	<!-- 로그인을 위해 폼값을 전송한 후 만약 조건에 맞는 회원정보가
-		없다면 request 영역에 에러메세지를 저장한 후 현재페이지로 forward한다.
-		request 영역은 forward된 페이지까지는 영역이 공유되므로 아래의 메세지를
-		출력할 수 있다. -->
-		<span style="color : red; font-size: 1.2em;">
-			<!-- if문 대신 삼항연산자를 통해 분기 -->
-			<%= request.getAttribute("LoginErrMsg") == null ?
-  						"" : request.getAttribute("LoginErrMsg") %>
-		</span>
-		
-		<%
-		/* session 영역에 해당 속성값이 있는지 확인한다.즉 session 영역에
-		저장된 속성이 없다면 로그아웃 상태이므로 로그인 폼을 웹 브라우저에 출력한다. */
-		if (session.getAttribute("UserId") == null) { // 로그인 상태 확인
-			// 로그아웃 상태
-		%>
-			<!-- 로그인 폼의 입력값을 서버로 전송하기 전에 검증하기 위해 정의한 함수.
-			입력값이 빈값인지 확인하여 경고창을 띄워준다. -->
-			<script>
-				function validateForm(form) {
-					if (!form.user_id.value) {
-						alert("아이디를 입력하세요.");
-						form.user_id.focus();
-						return false;
-					}
-					if (form.user_pw.value == "") {
-						alert("패스워드를 입력하세요.");
-						form.user_pw.focus();
-						return false;
-					}
-				}
-			</script>
-            <form name="loginFrm" method="post" action="./login.do"
-            	onsubmit="return validateForm(this);">
-              <fieldset>
-                <legend>로그인</legend>
-                <div class="row input_wrap1">
-                  <input type="text" name="user_id" placeholder="아이디">
-                </div>
-                <div class="row input_wrap2">
-                  <input type="password" name="user_pw" placeholder="비밀번호">
-                </div>
-                <div class="row3 checkbox_wrap">
-                  <input type="checkbox" id="check1" class="blind">
-                  <label for="check1">로그인 상태 유지</label>
-                </div>
-                <button type="submit" class="login_btn">로그인</button>
-              </fieldset>
-            </form>
-          </div>
-          	<%
-			} else { // 로그인 된 상태
-				/*
-				session 영역에 속성값이 있다면 로그인에 성공한 상태이므로 회원의
-				이름과 로그아웃 버튼을 출력한다.
-				*/
-			%>
-				<%= session.getAttribute("UserName") %> 회원님, 로그인하셨습니다.<br />
-				<a href="./editmember.do">회원정보 수정</a>
-				<a href="Logout.jsp">[로그아웃]</a>
-			<% 
-			}
-			%>	
+			<span style="color : red; font-size: 1.2em;">
+				<c:choose>
+					<c:when test="${ LoginErrMsg eq null }"></c:when>
+					<c:otherwise>${ LoginErrMsg }</c:otherwise>
+				</c:choose>
+			</span>
+			
+			<c:choose>
+				<c:when test="${ UserId eq null }">
+					<script>
+						function validateForm(form) {
+							if (!form.user_id.value) {
+								alert("아이디를 입력하세요.");
+								form.user_id.focus();
+								return false;
+							}
+							if (form.user_pw.value == "") {
+								alert("패스워드를 입력하세요.");
+								form.user_pw.focus();
+								return false;
+							}
+						}
+					</script>
+		            <form name="loginFrm" method="post" action="./login.do"
+		            	onsubmit="return validateForm(this);">
+		              <fieldset>
+		                <legend>로그인</legend>
+		                <div class="row input_wrap1">
+		                  <input type="text" name="user_id" placeholder="아이디">
+		                </div>
+		                <div class="row input_wrap2">
+		                  <input type="password" name="user_pw" placeholder="비밀번호">
+		                </div>
+		                <div class="row3 checkbox_wrap">
+		                  <input type="checkbox" id="check1" class="blind">
+		                  <label for="check1">로그인 상태 유지</label>
+		                </div>
+		                <button type="submit" class="login_btn">로그인</button>
+		              </fieldset>
+		            </form>
+				</c:when>
+				<c:otherwise>
+					${ UserName } 회원님, 로그인하셨습니다.<br />
+					<a href="./editmember.do">회원정보 수정</a>
+					<a href="Logout.jsp">[로그아웃]</a>
+				</c:otherwise>
+          	</c:choose>
+	      </div>
           <ul class="link_wrap">
             <li><a href="./register.do">회원가입</a></li>
             <li><a href="#">넥슨ID 찾기</a></li>

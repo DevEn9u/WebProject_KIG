@@ -50,7 +50,7 @@ public class MemberDAO extends JDBConnect {
 	}
 	
 	public String getUserName(String id) {
-		String query = "SELECT name FROM member WHERE id = ?";
+		String query = "SELECT * FROM member WHERE id = ?";
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, id);
@@ -64,6 +64,32 @@ public class MemberDAO extends JDBConnect {
 		}
 		
 		return null;
+	}
+	
+	public MemberDTO getUserInfo(String id) {
+		MemberDTO dto = new MemberDTO();
+		
+		String query = "SELECT * FROM member WHERE id = ?";
+		
+		try {
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			
+			
+			if (rs.next()) {
+				dto.setId(rs.getString(1));
+				dto.setPass(rs.getString(2));
+				dto.setName(rs.getString(3));
+				dto.setEmail(rs.getString(4));
+				dto.setPhone(rs.getString(5));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 	
 	// 회원 아이디로 회원 정보 조회 
@@ -83,6 +109,7 @@ public class MemberDAO extends JDBConnect {
 				String phone = rs.getString("phone_number");
 				
 				member = new MemberDTO(id, pass, name, email, phone);
+				System.out.println(member + "###");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,7 +139,7 @@ public class MemberDAO extends JDBConnect {
 	// 회원 정보 수정 후 업데이트
 	public boolean updateMember(MemberDTO member) {
 		boolean isSuccess = false;
-		String query = "UPDATE member SET pass = ?, eamli = ?, phone_number = ? WHERE id = ?";
+		String query = "UPDATE member SET pass = ?, eamil = ?, phone_number = ? WHERE id = ?";
 		
 		try {
 			psmt = con.prepareStatement(query);

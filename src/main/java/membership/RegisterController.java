@@ -31,7 +31,6 @@ public class RegisterController extends HttpServlet {
 		String email = req.getParameter("email");
 		String phone = req.getParameter("phone");
 		
-		MemberDTO memberDTO = new MemberDTO();
 
 		// 아이디 유효성 검사
 		if (!isValidId(id)) {
@@ -43,21 +42,21 @@ public class RegisterController extends HttpServlet {
 			JSFunction.alertBack(resp, "비밀번호는 숫자와 영문자 조합으로 8자 이상이어야 합니다.");
 			return;
 		}
-//		if (isValidId(id) && isValidPass(pass)) {
-			memberDTO.setId(id);
-			memberDTO.setPass(pass);
-			memberDTO.setName(name);
-			memberDTO.setEmail(email);
-			memberDTO.setPhone(phone);			
-//		}
+		MemberDTO memberDTO = new MemberDTO();
+
+		memberDTO.setId(id);
+		memberDTO.setPass(pass);
+		memberDTO.setName(name);
+		memberDTO.setEmail(email);
+		memberDTO.setPhone(phone);			
 		
-		try {
-			phone = formatPhoneNumberForDB(phone);
-			memberDTO.setPhone(phone);
-		} catch (Exception e) {
-			JSFunction.alertBack(resp, e.getMessage());
-			return;
-		}
+//		try {
+//			phone = formatPhoneNumberForDB(phone);
+//			memberDTO.setPhone(phone);
+//		} catch (Exception e) {
+//			JSFunction.alertBack(resp, e.getMessage());
+//			return;
+//		}
 		
 
 		
@@ -67,11 +66,11 @@ public class RegisterController extends HttpServlet {
 		
 		if (isSuccess) {
 			// 가입 성공시 성공 알림 띄워줌
-			JSFunction.alertLocation(resp, "가입에 성공하였습니다.", "./index.jsp");
+			JSFunction.alertLocation(resp, "가입에 성공하였습니다.", "./login.jsp");
 		}
 		else {
 			// 가입 실패시 실패 알림 띄워줌
-			JSFunction.alertLocation(resp, "가입에 실패하였습니다.", "./index.jsp");
+			JSFunction.alertLocation(resp, "가입에 실패하였습니다.", "./register.do");
 		}
 	}
 	
@@ -89,7 +88,7 @@ public class RegisterController extends HttpServlet {
 		return matcher.matches();
 	}
 	
-	// 비밀번호 유성 검사 메서드
+	// 비밀번호 유효성 검사 메서드
 	private boolean isValidPass(String pass) {
 		/* regex는 Regular Expression(정규평가식 이하 정규식)을 나타낸 변수로 자바에서는 정규식으로
 		 문자열에서 규칙검사시 사용된다. */
@@ -101,15 +100,15 @@ public class RegisterController extends HttpServlet {
 	}
 
 	// 핸드폰 번호 형식 변환 메서드
-	private String formatPhoneNumberForDB(String phoneNumber) {
-	    // 입력 형식 체크 (00000000000)
-	    if (!phoneNumber.matches("\\d{11}")) {
-	        throw new IllegalArgumentException("핸드폰 번호는 11자리 숫자여야 합니다.");
-	    }
-
-	    // DB에 저장할 형식으로 변환 (000-0000-0000)
-	    return phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(3, 7) + "-" + phoneNumber.substring(7);
-	}
+//	private String formatPhoneNumberForDB(String phoneNumber) {
+//	    // 입력 형식 체크 (00000000000)
+//	    if (!phoneNumber.matches("\\d{11}")) {
+//	        throw new IllegalArgumentException("핸드폰 번호는 11자리 숫자여야 합니다.");
+//	    }
+//
+//	    // DB에 저장할 형식으로 변환 (000-0000-0000)
+//	    return phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(3, 7) + "-" + phoneNumber.substring(7);
+//	}
 	
 }
 

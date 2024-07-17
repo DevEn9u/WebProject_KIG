@@ -23,27 +23,29 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("user_id");
 		String pass = req.getParameter("user_pw");
-		
-		if (id == null || id.isEmpty()) {
-			req.setAttribute("LoginErrMag", "아이디를 입력하세요.");
-			req.getRequestDispatcher("/login.jsp").forward(req, resp);
-			return;
-		}
-		if (pass == null || pass.isEmpty()) {
-			req.setAttribute("LoginErrMag", "비밀번호를 입력하세요.");
-			req.getRequestDispatcher("/login.jsp").forward(req, resp);
-			return;
-		}
+//		작동안하는 것 같아서 주석
+//		if (id == null || id.isEmpty()) {
+//			req.setAttribute("LoginErrMag", "아이디를 입력하세요.");
+//			req.getRequestDispatcher("/login.jsp").forward(req, resp);
+//			return;
+//		}
+//		if (pass == null || pass.isEmpty()) {
+//			req.setAttribute("LoginErrMag", "비밀번호를 입력하세요.");
+//			req.getRequestDispatcher("/login.jsp").forward(req, resp);
+//			return;
+//		}
 		
 		// dao를 통해 DB의 id와 비밀번호를 검증하고 세션에 저장
 		MemberDAO dao = new MemberDAO(getServletContext());
 		boolean loginResult = dao.checkLogin(id, pass);
 		
 		if (loginResult) {
-			// 로그인 성공시 세션에 정보 저장
+			// 로그인 성공시 세션에 정보 저장, 이후 정보수정을 위해서 모든 데이터 저장
 			HttpSession session = req.getSession();
 			session.setAttribute("UserId", id);
 			session.setAttribute("UserName", dao.getUserName(id));
+			System.out.println(req.getParameter("user_id") + "로컨");
+		
 			
 			resp.sendRedirect("./login.do");
 		}

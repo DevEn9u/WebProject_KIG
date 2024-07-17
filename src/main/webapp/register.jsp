@@ -27,39 +27,89 @@
   <script src="js/swiper-bundle.min.js"></script>
   <script src="js/ui-common.js?v=<?php echo time(); ?>"></script>
   <script type="text/javascript">
-  	
-		function validateForm(form) {  // 폼 내용 검증
-		    if (form.id.value == "") {
-		        alert("아이디를 입력하세요.");
-		        form.id.focus();
-		        return false;
-		    }
-		    if (form.pass.value == "") {
-		        alert("비밀번호를 입력하세요.");
-		        form.pass.focus();
-		        return false;
-		    }
-		    if (form.pass.value != form.pass2.value) {
-		    	alert("비밀번호가 일치하지 않습니다.")
-		    	form.pass.focus();
-		    	return false;
-		    }
-		    if (form.name.value == "") {
-		        alert("이름을 입력하세요.");
-		        form.name.focus();
-		        return false;
-		    }
-		    if (form.email.value == "") {
-		        alert("이메일을 입력하세요.");
-		        form.email.focus();
-		        return false;
-		    }
-		    if (form.tel.value == "") {
-		        alert("전화번호를 입력하세요.");
-		        form.tel.focus();
-		        return false;
-		    }
+	function validateForm(form) {  // 폼 내용 검증
+	    if (form.id.value == "") {
+	        alert("아이디를 입력하세요.");
+	        form.id.focus();
+	        return false;
+	    }
+		if (form.idDuplication.value != "idChecked") {
+			alert("아이디 중복체크를 해주세요.");
+			return false;
 		}
+	    if (form.pass.value == "") {
+	        alert("비밀번호를 입력하세요.");
+	        form.pass.focus();
+	        return false;
+	    }
+	    if (form.pass2.value == "") {
+	        alert("비밀번호 확인을 위해 같은 비밀번호를 입력하세요.");
+	        form.pass2.focus();
+	        return false;
+	    }
+	    if (form.pass.value != form.pass2.value) {
+	    	alert("비밀번호가 일치하지 않습니다.")
+	    	form.pass.focus();
+	    	return false;
+	    }
+	    if (form.name.value == "") {
+	        alert("이름을 입력하세요.");
+	        form.name.focus();
+	        return false;
+	    }
+	    if (form.email.value == "") {
+	        alert("이메일을 입력하세요.");
+	        form.email.focus();
+	        return false;
+	    }
+	    if (form.phone.value == "") {
+	        alert("전화번호를 입력하세요.");
+	        form.phone.focus();
+	        return false;
+	    }
+//         if (isNaN(form.phone.value)){
+// 			alert("전화번호는 - 제외한 숫자만 입력해주세요.");
+// 			return false;
+// 		}
+		
+		// 모든 검증을 통과했을 경우 회원가입 로직 실행
+		return true;
+	}
+	
+	function idCheck() {
+		let id = document.registerFrm.id.value;
+		if (id == '') {
+			alert("아이디를 입력하세요.");
+			document.registerFrm.id.focus();
+			return false;
+		}
+		else {
+			
+		window.name = "parentForm";
+		window.open("IdCheckForm.jsp?id=" + id,
+				"chkForm", "width=500, height=300, resizable = no, scrollbars = no" );
+		}
+	}
+	
+	function formatPhoneNumber(input) {
+		let phone = document.registerFrm.phone.value;
+		
+		let cleanedInput = input.value.replace(/[^\d]/g, '');
+		
+		cleanedInput = cleanedInput.slice(0, 11);
+		
+		// 3번째 숫자와 7번째 숫자 뒤에 '-'를 추가하여 '010-1234-5678' 구조로 만들기
+		let dashInput = '';
+		
+		for (let i = 0; i < cleanedInput.length; i++) {
+			if (i === 3 || i === 7) {
+				dashInput += '-';
+			}
+			dashInput += cleanedInput[i];
+		}
+		input.value = dashInput;
+	}
+
 </script>
 </head>
 <body>
@@ -209,12 +259,13 @@
           	<form name="registerFrm" method="post" action="./register.do"
           		onsubmit="return validateForm(this);">
 			    아이디 : <input type="text" name="id" placeholder="6-12자 이내의 아이디를 입력해주세요.">
-			    <button type="button" onclick="return validateForm(this);">클릭해 보세요!</button> <br />
+			    <button type="button" onclick="idCheck()">아이디 중복 확인</button> <br />
+			    <input type="hidden" name="idDuplication" value="idUnchecked" />
 			    비밀번호 : <input type="password" name="pass" placeholder="영문+숫자의 조합으로 8자 이상의 비밀번호를 입력해주세요.">
-			    비밀번호 확인 : <input type="password" name="pass2" placeholder="비밀번호를 다시 입력해주세요.">
+			    비밀번호 확인 : <input type="password" name="pass2" placeholder="비밀번호 확인을 위해 같은 비밀번호를 입력해주세요.">
 			    이름 : <input type="text" name="name" />
 			    Email : <input type="email" name="email"> <br />
-			    전화번호 : <input type="tel" name="phone" oninput="formatPhoneNumber(this)" ><br />
+			    전화번호 : <input type="text" name="phone" oninput="formatPhoneNumber(this)" ><br />
 			    <input type="submit" value="회원가입">
 			</form>
           </div>
