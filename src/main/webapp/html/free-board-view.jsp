@@ -16,14 +16,14 @@
         <div class="sub_top">
           <div class="inner">
             <p class="location">
-              <span>Home</span><span>투자정보</span><span>공고</span>
+              <span>Home</span><span>커뮤니티</span><span>자유게시판</span>
             </p>
-            <h2>공고</h2>
+            <h2>자유게시판</h2>
             <div class="board_category_wrap">
               <ul class="board_category">
-                <li class="active"><a href="#">결산공고</a></li>
-                <li><a href="#">기타공고</a></li>
-                <li><a href="#">중앙판교개발</a></li>
+                <li class="active"><a href="../free-board/list.do">자유게시판</a></li>
+                <li><a href="../qna-board/list.do">QnA</a></li>
+                <li><a href="../download-board/list.do">자료실</a></li>
               </ul>
             </div>
           </div>
@@ -32,21 +32,23 @@
           <div class="inner">
             <div class="board_view">
               <div class="tit_wrap">
-                <h3>제9기 결산공고</h3>
-                <p class="date">2024.03.28</p>
+                <h3>${ dto.title }</h3>
+                <p class="date">${ dto.postDate }</p>
+                <p class="date">작성자 : ${ dto.name }</p>
+                <p class="date">조회수 : ${ dto.visitcount }</p>
               </div>
               <div class="view_con">
-                <span>게시물 내용</span>
+                <span>${ dto.content }</span>
               </div>
-              <dl class="file_down">
+<!--               <dl class="file_down">
                 <dt>첨부파일 :</dt>
-                <dd><a href="#">제9기 넥슨게임즈 결산공고별도.pdf</a></dd>
+                <dd><a href="#"></a></dd>
               </dl>
               <dl class="file_down">
                 <dt>첨부파일 :</dt>
-                <dd><a href="#">제9기 넥슨게임즈 결산공고연결.pdf</a></dd>
-              </dl>
-              <ul class="paging">
+                <dd><a href="#"></a></dd>
+              </dl> -->
+<!--               <ul class="paging">
                 <li class="prev_paging">
                   <em>이전글</em>
                   <p>등록된 게시물이 없습니다.</p>
@@ -55,9 +57,19 @@
                   <a href="#">제8기 결산공고</a>
                   <em>다음글</em>
                 </li>
-              </ul>
+              </ul> -->
               <div class="btn_wrap">
-                <a href="account-list.jsp" class="list_btn">목록으로</a>
+				<button type="button" class="list_btn"
+					onclick="location.href='../free-board/edit.do?idx=${ param.idx }';">
+                	수정하기
+            	</button>
+	            <button type="button" class="list_btn"
+					onclick="location.href='../free-board/delete.do?idx=${ param.idx }';">
+	                삭제하기
+	            </button>
+                <button type="button"
+                	onclick="location.href='../free-board/list.do';"
+                	class="list_btn">목록으로</button>
               </div>
             </div>
           </div>

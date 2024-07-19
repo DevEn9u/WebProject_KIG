@@ -851,20 +851,30 @@ caption.nohead {
   padding: 25px 0;
   text-align: center;
 }
-.board_list td:first-child {
-  text-align: left;
-}
 .board_list tr:last-child td {
   border-bottom: 2px solid #000;
 }
 
 .board_list .col1 {
-  width: 80%;
+  width: 10%;
+}
+.board_list .col2 {
+  width: 70%;
+}
+.board_list .col3 {
+  width: 10%;
+}
+.board_list .col4 {
+  width: 10%;
+}
+.board_list .col5 {
+  width: 10%;
 }
 
 /* 게시판 읽기 */
 .board_view .view_con {
   border-top: 1px solid #191b1d;
+  border-bottom: 1px solid #191b1d;
   padding: 40px 0 150px;
 }
 

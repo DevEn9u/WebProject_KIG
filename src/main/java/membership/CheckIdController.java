@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import utils.JSFunction;
 
-@WebServlet("/CheckId.do")
+@WebServlet("/member/checkId.do")
 public class CheckIdController extends HttpServlet {
 
 	@Override
@@ -18,8 +18,7 @@ public class CheckIdController extends HttpServlet {
 		
 		MemberDAO dao = new MemberDAO(getServletContext());
 		boolean isDuplicate = dao.checkDuplicateId(id);
-		
-		if (!id.isEmpty()) {
+		if (!(id.length() < 6 || id.length() > 13)) {
 			if (isDuplicate) {
 				JSFunction.alertBack(resp, "이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.");
 			}
@@ -30,7 +29,8 @@ public class CheckIdController extends HttpServlet {
 			}
 		}
 		else {
-			JSFunction.alertBack(resp, "아이디를 입력하세요.");
+			JSFunction.alertBack(resp, "6-12자 사이의 아이디를 입력해주세요.");
+		
 		}
 
 	}

@@ -3,11 +3,6 @@
   <display-name>WebProject_KIG</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-    <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
    <context-param>
@@ -31,6 +26,16 @@
   <context-param>
   	<param-name>OraclePwd</param-name>
   	<param-value>ng1234</param-value>
+  </context-param>
+  
+  <context-param>
+  	<param-name>POSTS_PER_PAGE</param-name>
+  	<param-value>3</param-value>
+  </context-param>
+
+  <context-param>
+  	<param-name>PAGES_PER_BLOCK</param-name>
+  	<param-value>2</param-value>
   </context-param>
   
 </web-app>

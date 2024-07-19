@@ -19,12 +19,11 @@
 // 			window.close();
 		}
 	}
-
 </script>
 </head>
 <body>
 	<h2>아이디 중복 확인</h2>
-	<form name="IdCheckFrm" action="CheckId.do">
+	<form name="IdCheckFrm" action="../member/checkId.do">
 		<label for="id">아이디 : </label>
 		<input type="text" id="id" name="id" value="<%= request.getParameter("id")%>"/>
 		<button type="submit" onclick="checkId()">확인</button>

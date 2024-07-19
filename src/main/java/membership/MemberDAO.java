@@ -34,42 +34,34 @@ public class MemberDAO extends JDBConnect {
 		return isSuccess;
 	}
 	
-	public boolean checkLogin(String id, String pass) {
+	
+	// 로그인 성공시 dto에 정보 저장
+	public MemberDTO checkLogin(String id, String pass) {
 		String query = "SELECT * FROM member WHERE id = ? AND pass = ?";
+		MemberDTO dto = new MemberDTO();
+		
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, id);
 			psmt.setString(2, pass);
 			rs = psmt.executeQuery();
-			
-			return rs.next();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
-	public String getUserName(String id) {
-		String query = "SELECT * FROM member WHERE id = ?";
-		try {
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, id);
-			rs = psmt.executeQuery();
-			
+		
 			if (rs.next()) {
-				return rs.getString("name");
+				dto.setId(rs.getString("id"));
+				dto.setPass(rs.getString("pass"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setPhone(rs.getString("phone_number"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		return null;
+		return dto;
 	}
 	
-	public MemberDTO getUserInfo(String id) {
-		MemberDTO dto = new MemberDTO();
-		
+	public MemberDTO getUserInfo(String id) {		
 		String query = "SELECT * FROM member WHERE id = ?";
+		MemberDTO dto = new MemberDTO();
 		
 		try {
 			

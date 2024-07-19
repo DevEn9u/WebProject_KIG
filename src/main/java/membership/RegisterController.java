@@ -11,14 +11,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import utils.JSFunction;
 
-@WebServlet("/register.do")
+@WebServlet("/member/register.do")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.getRequestDispatcher("/register.jsp").forward(req, resp);
+		req.getRequestDispatcher("/html/register.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -42,6 +42,7 @@ public class RegisterController extends HttpServlet {
 			JSFunction.alertBack(resp, "비밀번호는 숫자와 영문자 조합으로 8자 이상이어야 합니다.");
 			return;
 		}
+		// DTO 객체 생성 및 폼값 저장
 		MemberDTO memberDTO = new MemberDTO();
 
 		memberDTO.setId(id);
@@ -50,27 +51,17 @@ public class RegisterController extends HttpServlet {
 		memberDTO.setEmail(email);
 		memberDTO.setPhone(phone);			
 		
-//		try {
-//			phone = formatPhoneNumberForDB(phone);
-//			memberDTO.setPhone(phone);
-//		} catch (Exception e) {
-//			JSFunction.alertBack(resp, e.getMessage());
-//			return;
-//		}
-		
-
-		
 		// DAO를 통해 DB에 회원 정보를 저장
 		MemberDAO dao = new MemberDAO(getServletContext());
 		boolean isSuccess = dao.registerMember(memberDTO);
 		
 		if (isSuccess) {
 			// 가입 성공시 성공 알림 띄워줌
-			JSFunction.alertLocation(resp, "가입에 성공하였습니다.", "./login.jsp");
+			JSFunction.alertLocation(resp, "가입에 성공하였습니다.", "../member/login.do");
 		}
 		else {
 			// 가입 실패시 실패 알림 띄워줌
-			JSFunction.alertLocation(resp, "가입에 실패하였습니다.", "./register.do");
+			JSFunction.alertLocation(resp, "가입에 실패하였습니다.", "../member/register.do");
 		}
 	}
 	

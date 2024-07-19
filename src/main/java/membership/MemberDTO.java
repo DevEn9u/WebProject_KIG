@@ -1,11 +1,13 @@
 package membership; 
 
 public class MemberDTO {
+
 	private String id;
 	private String pass;
 	private String name;
 	private String email;
 	private String phone;
+	private String regidate;
 	
 	public MemberDTO() {}
 	
@@ -46,5 +48,11 @@ public class MemberDTO {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getRegidate() {
+		return regidate;
+	}
+	public void setRegidate(String regidate) {
+		this.regidate = regidate;
 	}
 }
