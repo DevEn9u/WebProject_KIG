@@ -10,24 +10,24 @@
   	
 	function validateForm(form) {  // 폼 내용 검증
 	    if (form.pass.value == "") {
-	        alert("비밀번호를 입력하세요. 에디트멤버");
+	        alert("비밀번호를 입력하세요.");
 	        form.pass.focus();
 	        return false;
 	    }
 	    if (form.pass.value != form.pass2.value) {
-	        alert("비밀번호 확인을 위해 같은 비밀번호를 입력하세요. 에멤");
+	        alert("비밀번호 확인을 위해 같은 비밀번호를 입력하세요.");
 	        form.pass.value = "";
 	        form.pass2.value = "";
 	        form.pass.focus();
 	        return false;
 	    }
 	    if (form.email.value == "") {
-	        alert("이메일을 입력하세요. 에멤");
+	        alert("이메일을 입력하세요.");
 	        form.email.focus();
 	        return false;
 	    }
 	    if (form.tel.value == "") {
-	        alert("전화번호를 입력하세요. 에멤");
+	        alert("전화번호를 입력하세요.");
 	        form.tel.focus();
 	        return false;
 	    }

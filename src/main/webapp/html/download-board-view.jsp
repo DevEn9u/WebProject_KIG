@@ -6,6 +6,16 @@
 <c:import url="/include/common_head.jsp"></c:import>
 <c:import url="/include/common_body_header.jsp" var="body_header"></c:import>
 <c:import url="/include/common_body_footer.jsp" var="body_footer"></c:import>
+ <script>
+//게시물 삭제를 위해 정의한 함수
+ function deletePost() {
+     let confirmed = confirm("게시물을 삭제하겠습니까?"); 
+     if (confirmed) {
+         let form = document.deleteFrm;
+         form.submit(); 
+     }
+ }
+ </script>
   <body>
     <div id="skip_navi">
       <a href="#container">본문 바로가기</a>
@@ -16,14 +26,14 @@
         <div class="sub_top">
           <div class="inner">
             <p class="location">
-              <span>Home</span><span>투자정보</span><span>공고</span>
+              <span>Home</span><span>커뮤니티</span><span>자료실</span>
             </p>
-            <h2>공고</h2>
+            <h2>자료실</h2>
             <div class="board_category_wrap">
               <ul class="board_category">
-                <li class="active"><a href="#">결산공고</a></li>
-                <li><a href="#">기타공고</a></li>
-                <li><a href="#">중앙판교개발</a></li>
+                <li><a href="../free-board/list.do">자유게시판</a></li>
+                <li><a href="../qna-board/list.do">QnA</a></li>
+                <li class="active"><a href="../download-board/list.do">자료실</a></li>
               </ul>
             </div>
           </div>
@@ -32,21 +42,41 @@
           <div class="inner">
             <div class="board_view">
               <div class="tit_wrap">
-                <h3>제9기 결산공고</h3>
-                <p class="date">2024.03.28</p>
+                <h3>${ dto.title }</h3>
+                <p class="date">${ dto.postDate }</p>
+                <p class="date">작성자 : ${ dto.name }</p>
+                <p class="date">조회수 : ${ dto.visitcount }</p>
+                <form name="deleteFrm" method="post"
+                	 action="../download-board/delete.do?idx=${ dto.idx }">
+                	<input type="hidden" name="idx" value="${ dto.idx }" />
+                </form>
               </div>
               <div class="view_con">
-                <span>게시물 내용</span>
+                <span>${ dto.content }</span>
+                <c:if test="${ not empty dto.ofile }">
+        		<br />
+	        		<c:choose>
+	        			<c:when test="${ mimeType eq 'img' }">
+			        		<img src="../Uploads/${ dto.sfile }" alt="이미지 없음" style="max-width: 200px;" />        			
+	        			</c:when>
+	        			<c:when test="${ mimeType eq 'audio' }">
+	        				<audio src="../Uploads/${ dto.sfile }" controls="controls" muted="muted"></audio>
+	        			</c:when>
+	        			<c:when test="${ mimeType eq 'video' }">
+	        				<video src="../Uploads/${ dto.sfile }" controls="controls" muted="muted" width="300px"></video>
+	        			</c:when>
+	        		</c:choose>
+        		</c:if>
               </div>
-              <dl class="file_down">
+              <c:if test="${ not empty dto.ofile }">
+               <dl class="file_down">
                 <dt>첨부파일 :</dt>
-                <dd><a href="#">제9기 넥슨게임즈 결산공고별도.pdf</a></dd>
-              </dl>
-              <dl class="file_down">
-                <dt>첨부파일 :</dt>
-                <dd><a href="#">제9기 넥슨게임즈 결산공고연결.pdf</a></dd>
-              </dl>
-              <ul class="paging">
+                <dd><a href="../download-board/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">${ dto.ofile }</a></dd>
+                <dd>다운로드수 : </dd>
+                <dd>${ dto.downcount }</dd>
+               </dl>
+              </c:if> 
+<!--               <ul class="paging">
                 <li class="prev_paging">
                   <em>이전글</em>
                   <p>등록된 게시물이 없습니다.</p>
@@ -55,9 +85,22 @@
                   <a href="#">제8기 결산공고</a>
                   <em>다음글</em>
                 </li>
-              </ul>
+              </ul> -->
               <div class="btn_wrap">
-                <a href="account-list.jsp" class="list_btn">목록으로</a>
+              	<!-- session에 저장된 UserId와 게시물 작성자와 동일할때만 수정&삭제 버튼 출력 -->
+              	<c:if test="${ UserId != null && UserId.toString().equals(dto.getId())}">
+					<button type="button" class="list_btn"
+						onclick="location.href='../download-board/edit.do?idx=${ param.idx }';">
+	                	수정하기
+	            	</button>
+		            <button type="button" class="list_btn"
+						onclick="deletePost();">
+		                삭제하기
+		            </button>
+              	</c:if>
+                <button type="button"
+                	onclick="location.href='../download-board/list.do';"
+                	class="list_btn">목록으로</button>
               </div>
             </div>
           </div>

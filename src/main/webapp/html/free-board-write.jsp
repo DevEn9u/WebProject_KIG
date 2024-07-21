@@ -21,7 +21,6 @@
               <span>Home</span><span>커뮤니티</span><span>자유게시판</span>
             </p>
             <h2>자유게시판</h2>
-            <a href="free-board-write.do" class="write_btn">게시물 작성하기</a>
             <div class="board_category_wrap">
               <ul class="board_category">
                 <li class="active"><a href="../free-board/list.do">자유게시판</a></li>

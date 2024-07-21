@@ -16,15 +16,15 @@
         <div class="sub_top">
           <div class="inner">
             <p class="location">
-              <span>Home</span><span>커뮤니티</span><span>자유게시판</span>
+              <span>Home</span><span>커뮤니티</span><span>자료실</span>
             </p>
-            <h2>자유게시판</h2>
-            <a href="../free-board/write.do" class="write_btn">게시물 작성하기</a>
+            <h2>자료실</h2>
+            <a href="../download-board/write.do" class="write_btn">게시물 작성하기</a>
             <div class="board_category_wrap">
               <ul class="board_category">
-                <li class="active"><a href="../free-board/list.do">자유게시판</a></li>
+                <li><a href="../free-board/list.do">자유게시판</a></li>
                 <li><a href="../qna-board/list.do">QnA</a></li>
-                <li><a href="../download-board/list.do">자료실</a></li>
+                <li class="active"><a href="../download-board/list.do">자료실</a></li>
               </ul>
             </div>
 				<form method="get">
@@ -56,7 +56,7 @@
                     <th class="col3">작성자</th>
                     <th class="col4">조회수</th>
                     <th class="col5">작성일</th>
-<!--                     <th class="col2">첨부</th> -->
+                    <th class="col2">첨부</th>
                   </tr>
                 </thead>
 				<c:choose>
@@ -74,13 +74,20 @@
 					            		+ loop.index)}
 					            </td>
 					            <td align="left">
-					                <a href="../free-board/view.do?idx=${ row.idx }">
+					                <a href="../download-board/view.do?idx=${ row.idx }">
 					                	${ row.title }
 					                </a>
 					            </td> 
 					            <td>${ row.name }</td>
 					            <td>${ row.visitcount }</td>
 					            <td>${ row.postDate }</td>
+					            <td>
+					            	<!-- 다운로드 링크는 첨부파일이 있을 때만 표시한다. -->
+					            	<c:if test="${ not empty row.ofile }">
+					            		<a href="../download-board/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[Down]
+					            		</a>
+					            	</c:if>
+					            </td>
 					    	</tr>
 						</c:forEach>
 					</c:otherwise>
@@ -90,7 +97,7 @@
 				<tr align="center">
             		<td>${ map.pagingImg }</td>
             		<td>
-            			<button type="button" onclick="location.href='../free-board/write.do';">글쓰기</button>
+            			<button type="button" onclick="location.href='../download-board/write.do';">글쓰기</button>
             		</td>
         		</tr>
 			  </table>

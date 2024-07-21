@@ -1,6 +1,8 @@
 package board;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,8 +11,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import utils.CookieManager;
 
-@WebServlet("/free-board/view.do")
-public class FreeBoardViewController extends HttpServlet{
+@WebServlet("/download-board/view.do")
+public class DownloadBoardViewController extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
@@ -26,18 +28,41 @@ public class FreeBoardViewController extends HttpServlet{
 			dao.updateVisitcountFree(idx);
 		}
 		
-		// 조회수 증가
-//		dao.updateVisitcountFree(idx);
 		// 게시물 인출
-		BoardDTO dto = dao.selectViewFree(idx);
+		BoardDTO dto = dao.selectViewDown(idx);
 		
 		dao.close();
 		
 		// 내용의 경우 엔터 클릭시 줄바꿈을 하게 되므로 br태그로 변경하여 웹 브라우저 출력
 		dto.setContent(dto.getContent().replaceAll("\r\n", "<br />"));
 		
+		// 확장자명 이용해서 image, audio, video 보여주기
+		String ext = null, fileName = dto.getSfile(), mimeType = null;
+		if (fileName != null) {
+			ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+		}
+		
+		String[] extArray1 = {"png", "jpg", "gif", "bmp"};
+		String[] extArray2 = {"mp3", "wav"};
+		String[] extArray3 = {"mp4", "avi", "wmv"};
+		
+		List<String> mimeList1 = Arrays.asList(extArray1);
+		List<String> mimeList2 = Arrays.asList(extArray2);
+		List<String> mimeList3 = Arrays.asList(extArray3);
+		
+		if (mimeList1.contains(ext)) {
+			mimeType = "img";
+		}
+		else if (mimeList2.contains(ext)) {
+			mimeType = "audio";
+		}
+		else if (mimeList3.contains(ext)) {
+			mimeType = "video";
+		}
+		
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/html/free-board-view.jsp").forward(req, resp);
+		req.setAttribute("mimeType", mimeType);
+		req.getRequestDispatcher("/html/download-board-view.jsp").forward(req, resp);
 	}
 }
 

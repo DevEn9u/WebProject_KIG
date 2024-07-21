@@ -35,7 +35,7 @@ public class FreeBoardListController extends HttpServlet {
 		}
 		
 		// 게시물 개수 카운트
-		int totalCount = dao.selectCount(map);
+		int totalCount = dao.selectCountFree(map);
 		
 		/* 페이지네이션 처리 */
 		ServletContext application = getServletContext();
@@ -62,7 +62,7 @@ public class FreeBoardListController extends HttpServlet {
 		/* 페이지네이션 end */
 		
 		// 해당 페이지에 출력할 게시물을 List로 얻어온다.
-		List<BoardDTO> boardLists = dao.selectListPage(map);
+		List<BoardDTO> boardLists = dao.selectListPageFree(map);
 		dao.close();
 		
 		// 페이지 번호를 String 타입으로 변환

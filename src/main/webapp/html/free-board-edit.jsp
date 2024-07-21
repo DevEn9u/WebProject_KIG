@@ -38,7 +38,7 @@
             <div class="board_write">
               <form name="writeFrm" method="post" action="../free-board/edit.do"
              	 onsubmit="return validateForm(this)">
-               <input type="hid-den" name="idx" value="${ dto.idx }" />             	 
+               <input type="hidden" name="idx" value="${ dto.idx }" />             	 
                <table>
                  <caption class="nohead">게시글 작성</caption>
                  <tr>

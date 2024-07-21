@@ -9,9 +9,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import utils.JSFunction;
 
-@WebServlet("/free-board/edit.do")
+@WebServlet("/qna-board/edit.do")
 
-public class FreeBoardEditController extends HttpServlet {
+public class QnABoardEditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -19,10 +19,10 @@ public class FreeBoardEditController extends HttpServlet {
 
 		String idx = req.getParameter("idx");
 		BoardDAO dao = new BoardDAO(getServletContext());
-		BoardDTO dto = dao.selectViewFree(idx);
+		BoardDTO dto = dao.selectViewQnA(idx);
 		// DTO를 request 영역에 저장한 후 수정페이지로 포워드한다.
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/html/free-board-edit.jsp").forward(req, resp);
+		req.getRequestDispatcher("/html/qna-board-edit.jsp").forward(req, resp);
 	}
 	
 	/*
@@ -53,17 +53,17 @@ public class FreeBoardEditController extends HttpServlet {
 		
 		
 		// DB에 수정 내용 적용
-		int result = dao.updatePostFree(dto);
+		int result = dao.updatePostQnA(dto);
 		dao.close();
 
 		if (result == 1) {
 			JSFunction.alertLocation(resp, "게시물이 수정되었습니다.",
-					"../free-board/view.do?idx=" + idx);
+					"../qna-board/view.do?idx=" + idx);
 		}
 		else {
 			//실패하면 경고창을 띄우고 이동한다.
 			JSFunction.alertLocation(resp, "게시물 수정에 실패하였습니다.",
-					"../free-board/view.do?idx=" + idx);
+					"../qna-board/view.do?idx=" + idx);
 		}
 	}
 }

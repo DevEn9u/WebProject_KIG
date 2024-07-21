@@ -44,7 +44,7 @@
 	      </div>
           <ul class="link_wrap">
             <li><a href="./editmember.do">회원정보 수정</a></li>
-            <li><a href="Logout.jsp">로그아웃</a></li>
+            <li><a href="../member/logout.do">로그아웃</a></li>
           </ul>
         </div>
       </div>

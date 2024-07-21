@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import utils.CookieManager;
 
-@WebServlet("/free-board/view.do")
-public class FreeBoardViewController extends HttpServlet{
+@WebServlet("/qna-board/view.do")
+public class QnABoardViewController extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
@@ -25,11 +25,8 @@ public class FreeBoardViewController extends HttpServlet{
 			// 게시물 조회수 증가
 			dao.updateVisitcountFree(idx);
 		}
-		
-		// 조회수 증가
-//		dao.updateVisitcountFree(idx);
 		// 게시물 인출
-		BoardDTO dto = dao.selectViewFree(idx);
+		BoardDTO dto = dao.selectViewQnA(idx);
 		
 		dao.close();
 		
@@ -37,7 +34,7 @@ public class FreeBoardViewController extends HttpServlet{
 		dto.setContent(dto.getContent().replaceAll("\r\n", "<br />"));
 		
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/html/free-board-view.jsp").forward(req, resp);
+		req.getRequestDispatcher("/html/qna-board-view.jsp").forward(req, resp);
 	}
 }
 

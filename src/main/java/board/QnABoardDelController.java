@@ -10,8 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import utils.JSFunction;
 
-@WebServlet("/free-board/delete.do")
-public class FreeBoardDelController extends HttpServlet {
+@WebServlet("/qna-board/delete.do")
+public class QnABoardDelController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -26,23 +26,23 @@ public class FreeBoardDelController extends HttpServlet {
 		String idx = req.getParameter("idx");
 		
 		BoardDAO dao = new BoardDAO(getServletContext());
-		BoardDTO dto = dao.selectViewFree(idx);
+		BoardDTO dto = dao.selectViewQnA(idx);
 		
 		String sessionId = (String) session.getAttribute("UserId");		
 		
 		
-		int result = dao.deletePostFree(idx);
+		int result = dao.deletePostQnA(idx);
 		dao.close();
 		if (sessionId.equals(dto.getId())) {
 			if (result == 1) {
 				JSFunction.alertLocation(resp, "게시물이 삭제되었습니다.",
-						"../free-board/list.do");
+						"../qna-board/list.do");
 				System.out.println(dto +"====");
 			}
 			else {
 				//실패하면 경고창을 띄우고 이동한다.
 				JSFunction.alertLocation(resp, "게시물 삭제에 실패하였습니다.",
-						"../free-board/view.do?idx=" + idx);
+						"../qna-board/view.do?idx=" + idx);
 			}
 		}
 		else {

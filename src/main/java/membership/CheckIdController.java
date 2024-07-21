@@ -29,7 +29,7 @@ public class CheckIdController extends HttpServlet {
 			}
 		}
 		else {
-			JSFunction.alertBack(resp, "6-12자 사이의 아이디를 입력해주세요.");
+			JSFunction.alertBack(resp, "아이디는 6~12자 이내이고 특수문자를 제외해야 합니다.");
 		
 		}
 

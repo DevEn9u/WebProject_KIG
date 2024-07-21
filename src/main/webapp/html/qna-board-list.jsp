@@ -16,14 +16,14 @@
         <div class="sub_top">
           <div class="inner">
             <p class="location">
-              <span>Home</span><span>커뮤니티</span><span>자유게시판</span>
+              <span>Home</span><span>커뮤니티</span><span>QnA</span>
             </p>
-            <h2>자유게시판</h2>
-            <a href="../free-board/write.do" class="write_btn">게시물 작성하기</a>
+            <h2>QnA</h2>
+            <a href="../qna-board/write.do" class="write_btn">게시물 작성하기</a>
             <div class="board_category_wrap">
               <ul class="board_category">
-                <li class="active"><a href="../free-board/list.do">자유게시판</a></li>
-                <li><a href="../qna-board/list.do">QnA</a></li>
+                <li><a href="../free-board/list.do">자유게시판</a></li>
+                <li class="active"><a href="../qna-board/list.do">QnA</a></li>
                 <li><a href="../download-board/list.do">자료실</a></li>
               </ul>
             </div>
@@ -74,7 +74,7 @@
 					            		+ loop.index)}
 					            </td>
 					            <td align="left">
-					                <a href="../free-board/view.do?idx=${ row.idx }">
+					                <a href="../qna-board/view.do?idx=${ row.idx }">
 					                	${ row.title }
 					                </a>
 					            </td> 
@@ -90,7 +90,7 @@
 				<tr align="center">
             		<td>${ map.pagingImg }</td>
             		<td>
-            			<button type="button" onclick="location.href='../free-board/write.do';">글쓰기</button>
+            			<button type="button" onclick="location.href='../qna-board/write.do';">글쓰기</button>
             		</td>
         		</tr>
 			  </table>

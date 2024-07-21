@@ -48,14 +48,15 @@
 		              <fieldset>
 		                <legend>로그인</legend>
 		                <div class="row input_wrap1">
-		                  <input type="text" name="user_id" placeholder="아이디">
+		                  <input type="text" name="user_id" value="${ saveId }" placeholder="아이디">
 		                </div>
 		                <div class="row input_wrap2">
 		                  <input type="password" name="user_pw" placeholder="비밀번호">
 		                </div>
 		                <div class="row3 checkbox_wrap">
-		                  <input type="checkbox" id="check1" class="blind">
-		                  <label for="check1">로그인 상태 유지</label>
+		                  <input type="checkbox" id="check1"
+		                  	name="save_check" value="Y" class="blind" ${ cookieCheck }>
+		                  <label for="check1">아이디 저장</label>
 		                </div>
 		                <button type="submit" class="login_btn">로그인</button>
 		              </fieldset>
