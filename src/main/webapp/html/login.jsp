@@ -67,7 +67,7 @@
           <ul class="link_wrap">
             <li><a href="./register.do">회원가입</a></li>
             <li><a href="#">넥슨ID 찾기</a></li>
-            <li><a href="#">비밀번호 찾기</a></li>
+            <li><a href="../member/findPass.do">비밀번호 찾기</a></li>
           </ul>
         </div>
       </div>

@@ -15,6 +15,13 @@
          form.submit(); 
      }
  }
+ function deleteComment() {
+     let confirmed = confirm("댓글을 삭제하겠습니까?"); 
+     if (confirmed) {
+         let form = document.commentFrm;
+         form.submit(); 
+     }
+ }
  </script>
   <body>
     <div id="skip_navi">
@@ -51,28 +58,12 @@
                 	<input type="hidden" name="idx" value="${ dto.idx }" />
                 </form>
               </div>
+              
+              <!-- 작성글 -->
               <div class="view_con">
                 <span>${ dto.content }</span>
               </div>
-<!--               <dl class="file_down">
-                <dt>첨부파일 :</dt>
-                <dd><a href="#"></a></dd>
-              </dl>
-              <dl class="file_down">
-                <dt>첨부파일 :</dt>
-                <dd><a href="#"></a></dd>
-              </dl> -->
-<!--               <ul class="paging">
-                <li class="prev_paging">
-                  <em>이전글</em>
-                  <p>등록된 게시물이 없습니다.</p>
-                </li>
-                <li class="next_paging">
-                  <a href="#">제8기 결산공고</a>
-                  <em>다음글</em>
-                </li>
-              </ul> -->
-              <div class="btn_wrap">
+			 <div class="btn_wrap">
               	<!-- session에 저장된 UserId와 게시물 작성자와 동일할때만 수정&삭제 버튼 출력 -->
               	<c:if test="${ UserId != null && UserId.toString().equals(dto.getId())}">
 					<button type="button" class="list_btn"
@@ -89,6 +80,39 @@
                 	class="list_btn">목록으로</button>
               </div>
             </div>
+            <div class="comment_section">
+                    <h3>댓글 작성하기</h3>
+                    <form name="commentFrm" method="post" action="../qna-board/comment_write.do">
+                        <input type="hidden" name="boardIdx" value="${ dto.idx }" /> <!-- 게시물 ID -->
+                         작성자 : <input type="text" name="name" value="${ UserName }" readonly="readonly" /> 
+                        <textarea name="commCon" rows="4" cols="50" placeholder="댓글을 입력하세요"></textarea>
+                        <br/>
+                        <button type="submit">댓글 작성</button>
+                    </form>
+                
+                
+                <!-- 댓글 목록 -->
+                <div class="view_con comment_list">
+                    <h3>댓글 목록</h3>
+                    <c:forEach var="comment" items="${ commentsList }">
+                        <div class="comment_item">
+                            <p>${ comment.name } (${ comment.postDate })</p>
+                            <p>${ comment.content }</p>
+                            <button type="button" class="list_btn"
+								onclick="location.href='../qna-board/edit.do?idx=${ param.idx }';">
+	                			수정하기
+	            			</button>
+				            <button type="button" class="list_btn"
+								onclick="deleteComment();">
+				                삭제하기
+				            </button>
+                        </div>
+                    </c:forEach>
+                    <c:if test="${ empty commentsList }">
+                        <p>등록된 댓글이 없습니다.</p>
+                    </c:if>
+                </div>
+          	</div>
           </div>
         </div>
       </main>

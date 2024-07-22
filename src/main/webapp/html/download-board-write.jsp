@@ -18,7 +18,7 @@
         <div class="sub_top">
           <div class="inner">
             <p class="location">
-              <span>Home</span><span>커뮤니티</span><span>자유게시판</span>
+              <span>Home</span><span>커뮤니티</span><span>자료실</span>
             </p>
             <h2>자료실</h2>
             <div class="board_category_wrap">

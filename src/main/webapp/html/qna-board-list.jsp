@@ -48,7 +48,7 @@
           <div class="inner">
             <div class="board_list">
               <table>
-                <caption>자유게시판</caption>
+                <caption>QnA</caption>
                 <thead>
                   <tr>
                     <th class="col1">번호</th>
@@ -56,7 +56,6 @@
                     <th class="col3">작성자</th>
                     <th class="col4">조회수</th>
                     <th class="col5">작성일</th>
-<!--                     <th class="col2">첨부</th> -->
                   </tr>
                 </thead>
 				<c:choose>

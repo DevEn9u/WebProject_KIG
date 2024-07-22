@@ -48,7 +48,7 @@
           <div class="inner">
             <div class="board_list">
               <table>
-                <caption>자유게시판</caption>
+                <caption>자료실</caption>
                 <thead>
                   <tr>
                     <th class="col1">번호</th>
@@ -56,13 +56,13 @@
                     <th class="col3">작성자</th>
                     <th class="col4">조회수</th>
                     <th class="col5">작성일</th>
-                    <th class="col2">첨부</th>
+                    <th class="col5">첨부</th>
                   </tr>
                 </thead>
 				<c:choose>
 					<c:when test="${ empty boardLists }">
 						<tr>
-							<td colspan="5" class="col2">등록된 게시물이 없습니다.</td>
+							<td colspan="6" class="col2">등록된 게시물이 없습니다.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>

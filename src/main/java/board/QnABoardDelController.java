@@ -37,7 +37,6 @@ public class QnABoardDelController extends HttpServlet {
 			if (result == 1) {
 				JSFunction.alertLocation(resp, "게시물이 삭제되었습니다.",
 						"../qna-board/list.do");
-				System.out.println(dto +"====");
 			}
 			else {
 				//실패하면 경고창을 띄우고 이동한다.

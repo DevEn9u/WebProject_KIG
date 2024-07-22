@@ -47,7 +47,6 @@ public class DownloadBoardDelController extends HttpServlet {
 				//실패하면 경고창을 띄우고 이동한다.
 				JSFunction.alertLocation(resp, "게시물 삭제에 실패하였습니다.",
 						"../download-board/view.do?idx=" + idx);
-				System.out.println(sessionId + dto.getId());
 			}
 		}
 		else {

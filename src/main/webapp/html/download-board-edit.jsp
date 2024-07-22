@@ -17,9 +17,9 @@
         <div class="sub_top">
           <div class="inner">
             <p class="location">
-              <span>Home</span><span>커뮤니티</span><span>자유게시판</span>
+              <span>Home</span><span>커뮤니티</span><span>자료실</span>
             </p>
-            <h2>자유게시판</h2>
+            <h2>자료실</h2>
             <div class="board_category_wrap">
               <ul class="board_category">
                 <li><a href="../free-board/list.do">자유게시판</a></li>
@@ -39,9 +39,9 @@
               <form name="writeFrm" method="post" enctype="multipart/form-data"
               	 action="../download-board/edit.do"
              	 onsubmit="return validateForm(this)">
-               <input type="hid-den" name="idx" value="${ dto.idx }" />
-               <input type="hid-den" name="prevOfile" value="${ dto.ofile }" />
-			   <input type="hid-den" name="PrevSfile" value="${ dto.sfile }" />         	 
+               <input type="hidden" name="idx" value="${ dto.idx }" />
+               <input type="hidden" name="prevOfile" value="${ dto.ofile }" />
+			   <input type="hidden" name="PrevSfile" value="${ dto.sfile }" />         	 
                <table>
                  <caption class="nohead">게시글 작성</caption>
                  <tr>

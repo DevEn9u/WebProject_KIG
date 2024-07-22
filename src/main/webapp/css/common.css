@@ -875,7 +875,10 @@ caption.nohead {
 .board_view .view_con {
   border-top: 1px solid #191b1d;
   border-bottom: 1px solid #191b1d;
-  padding: 40px 0 150px;
+  padding: 40px 0;
+}
+.board_view .view_con:last-child {
+	margin-top: 40px;
 }
 
 .board_view .file_down {

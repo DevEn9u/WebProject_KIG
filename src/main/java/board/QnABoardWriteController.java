@@ -7,7 +7,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import utils.JSFunction;
 
 @WebServlet("/qna-board/write.do")
@@ -37,6 +36,7 @@ public class QnABoardWriteController extends HttpServlet {
 		// 글 작성이 되면 result가 psmt.executeUpdate();에 의해 1이 됨
 		if (result == 1) {
 			JSFunction.alertLocation(resp, "글쓰기에 성공했습니다.", "../qna-board/list.do");
+		
 		}
 		else {
 			JSFunction.alertLocation(resp, "글쓰기에 실패했습니다.", "../qna-board/write.do");
