@@ -97,7 +97,7 @@
 				<tr align="center">
             		<td>${ map.pagingImg }</td>
             		<td>
-            			<button type="button" onclick="location.href='../download-board/write.do';">글쓰기</button>
+            			<a href="../download-board/write.do" class="write_btn">글쓰기</a>
             		</td>
         		</tr>
 			  </table>

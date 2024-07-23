@@ -42,6 +42,11 @@ public class RegisterController extends HttpServlet {
 			JSFunction.alertBack(resp, "비밀번호는 숫자와 영문자 조합으로 8자 이상이어야 합니다.");
 			return;
 		}
+		// 전화번호 유효성 검사
+		if (!isValidPhone(phone)) {
+			JSFunction.alertBack(resp, "전화번호는 010-0000-0000 형식이어야 합니다..");
+			return;
+		}
 		// DTO 객체 생성 및 폼값 저장
 		MemberDTO memberDTO = new MemberDTO();
 
@@ -89,7 +94,17 @@ public class RegisterController extends HttpServlet {
 		Matcher matcher = pattern.matcher(pass);
 		return matcher.matches();
 	}
+	// 핸드폰 번호 입력 유효성 메서드
+	private boolean isValidPhone(String phone) {
+		// 휴대폰 번호는 010으로 시작한 11자리여야 한다.
+		String regex = "^010-[0-9]{4}-[0-9]{4}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(phone);
+		return matcher.matches();
+	}
 
+	
+	
 	// 핸드폰 번호 형식 변환 메서드
 //	private String formatPhoneNumberForDB(String phoneNumber) {
 //	    // 입력 형식 체크 (00000000000)

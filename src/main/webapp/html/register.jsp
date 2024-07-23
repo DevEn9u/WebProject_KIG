@@ -120,7 +120,7 @@
 			    비밀번호 확인 : <input type="password" name="pass2" placeholder="비밀번호 확인을 위해 같은 비밀번호를 입력해주세요.">
 			    이름 : <input type="text" name="name" />
 			    Email : <input type="email" name="email"> <br />
-			    전화번호 : <input type="text" name="phone" oninput="formatPhoneNumber(this)" ><br />
+			    전화번호 : <input type="text" name="phone" oninput="formatPhoneNumber(this)" placeholder="숫자만 입력해주세요." ><br />
 			    <button type="submit" class="login_btn">회원가입</button>
 			</form>
           </div>

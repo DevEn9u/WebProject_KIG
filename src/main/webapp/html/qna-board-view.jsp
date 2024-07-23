@@ -18,7 +18,7 @@
  function deleteComment() {
      let confirmed = confirm("댓글을 삭제하겠습니까?"); 
      if (confirmed) {
-         let form = document.commentFrm;
+         let form = document.commentDelFrm;
          form.submit(); 
      }
  }
@@ -61,6 +61,7 @@
               
               <!-- 작성글 -->
               <div class="view_con">
+              	<form name="commentDelFrm" method="post" action="../qna-board/comment_delete.do?commIdx=${ commentDTO.commIdx }"></form>
                 <span>${ dto.content }</span>
               </div>
 			 <div class="btn_wrap">
@@ -96,10 +97,12 @@
                     <h3>댓글 목록</h3>
                     <c:forEach var="comment" items="${ commentsList }">
                         <div class="comment_item">
+                        	<form action="../qna-board/comment-delete.do?commIdx=${ comment.commIdx }"></form>
+                        	<input type="hidden" name="commIdx" value="${ comment.commIdx }" />
                             <p>${ comment.name } (${ comment.postDate })</p>
                             <p>${ comment.content }</p>
                             <button type="button" class="list_btn"
-								onclick="location.href='../qna-board/edit.do?idx=${ param.idx }';">
+								onclick="location.href='../qna-board/comment-edit.do?idx=${ param.idx }';">
 	                			수정하기
 	            			</button>
 				            <button type="button" class="list_btn"
@@ -111,6 +114,11 @@
                     <c:if test="${ empty commentsList }">
                         <p>등록된 댓글이 없습니다.</p>
                     </c:if>
+                     <table border="1">
+						<tr align="center">
+	            			<td>페이징 : ${ map.pagingImg }</td>
+	        			</tr>
+			  		</table>
                 </div>
           	</div>
           </div>

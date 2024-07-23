@@ -47,9 +47,9 @@ public class LoginController extends HttpServlet {
 		MemberDAO dao = new MemberDAO(getServletContext());
 		MemberDTO dto = dao.checkLogin(id, pass);
 				
+		HttpSession session = req.getSession();
 		if (dto.getId() != null) {
 			// 로그인 성공시 세션에 정보 저장, 이후 정보수정을 위해서 모든 데이터 저장
-			HttpSession session = req.getSession();
 			session.setAttribute("UserId", dto.getId());
 			session.setAttribute("UserName", dto.getName());
 			
@@ -65,10 +65,14 @@ public class LoginController extends HttpServlet {
 			
 			resp.sendRedirect("../main/index.do");
 		}
+		else if (dto.getId() != session.getAttribute("UserId")) {
+			CookieManager.deleteCookie(resp, "saveId");
+			session.setAttribute("UserId", dto.getId());
+			session.setAttribute("UserName", dto.getName());
+		}
 		else {
 			// 로그인에 실패한 경우	경고메세지와 함께 로그인화면으로.	
 			JSFunction.alertBack(resp, "아이디 또는 비밀번호가 잘못되었습니다.");
-			
 		}
 		
 	}

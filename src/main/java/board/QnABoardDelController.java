@@ -30,7 +30,7 @@ public class QnABoardDelController extends HttpServlet {
 		
 		String sessionId = (String) session.getAttribute("UserId");		
 		
-		
+		System.out.println(sessionId + "###" + dto.getId());
 		int result = dao.deletePostQnA(idx);
 		dao.close();
 		if (sessionId.equals(dto.getId())) {

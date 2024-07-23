@@ -90,7 +90,7 @@
 				<tr align="center">
             		<td>${ map.pagingImg }</td>
             		<td>
-            			<button type="button" onclick="location.href='../free-board/write.do';">글쓰기</button>
+            			<button type="button" onclick="location.href='../free-board/write.do';" class="write_btn">글쓰기</button>
             		</td>
         		</tr>
 			  </table>

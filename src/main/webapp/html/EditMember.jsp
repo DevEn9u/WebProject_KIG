@@ -78,7 +78,7 @@
 				    비밀번호 확인 : <input type="password" name="pass2" placeholder="비밀번호를 다시 입력해주세요.">
 				    이름 : <input type="text" name="name" value="${ dto.name }" readonly="readonly"/>
 				    Email : <input type="email" name="email" value="${ dto.email }" > <br />
-			    	전화번호 : <input type="text" name="phone" oninput="formatPhoneNumber(this)" value="${ dto.phone }" ><br />
+			    	전화번호 : <input type="text" name="phone" oninput="formatPhoneNumber(this)" value="${ dto.phone }" placeholder="숫자만 입력해주세요."><br />
 			    	<button type="submit">수정하기</button>
           		</fieldset>
 			</form>

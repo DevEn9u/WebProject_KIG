@@ -79,6 +79,7 @@ public class QnABoardListController extends HttpServlet {
 		// 현재 페이지 번호
 		map.put("pageNum", pageNum);
 		
+		
 		// View(JSP)로 전달할 페이지를 request 영역에 저장
 		req.setAttribute("boardLists", boardLists);
 		req.setAttribute("map", map);

@@ -138,6 +138,8 @@ public class MemberDAO extends JDBConnect {
 			psmt.setString(2, member.getEmail());
 			psmt.setString(3, member.getPhone());
 			psmt.setString(4, member.getId());
+
+			isSuccess = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

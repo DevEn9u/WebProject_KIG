@@ -1,9 +1,7 @@
-package board;
+package comments;
 
 import java.io.IOException;
 
-import comments.CommentDAO;
-import comments.CommentDTO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,8 +23,7 @@ public class CommentsWriteController extends HttpServlet {
 		commentDTO.setName(req.getParameter("name"));
 		commentDTO.setContent(req.getParameter("commCon")); // 댓글 내용
 		commentDTO.setId(id);
-		
-		
+				
 		// DAO를 통해 DA에 게시물 내용을 저장한다.
 		CommentDAO dao = new CommentDAO(getServletContext());
 		int result = dao.insertWriteComm(commentDTO);

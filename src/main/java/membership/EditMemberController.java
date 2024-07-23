@@ -52,6 +52,11 @@ public class EditMemberController extends HttpServlet {
 			JSFunction.alertBack(resp, "비밀번호는 숫자와 영문자 조합으로 8자 이상이어야 합니다.");
 			return;
 		}
+		// 전화번호 유효성 검사
+		if (!isValidPhone(phone)) {
+			JSFunction.alertBack(resp, "전화번호는 010-0000-0000 형식이어야 합니다.");
+			return;
+		}
 		
 		// DAO를 통해 사용자 정보 가져오기
 		MemberDAO dao = new MemberDAO(getServletContext());
@@ -63,14 +68,10 @@ public class EditMemberController extends HttpServlet {
 		}
 		else {
 			// 수정 실패시 실패 알림 띄워줌
-			JSFunction.alertLocation(resp, "회원 정보 수정에 실패하였습니다.", "./member/register.do");
-		}
-		
-		System.out.println(dto.getPhone() + "에디트컨트롤러");
-		System.out.println(dto.getPass () + "에디트컨트롤러");
-		
+			JSFunction.alertLocation(resp, "회원 정보 수정에 실패하였습니다.", "../member/editmember.do");
+		}		
 
-		req.getRequestDispatcher("/editmember.do").forward(req, resp);
+//		req.getRequestDispatcher("/editmember.do").forward(req, resp);
 	}
 	
 	// 비밀번호 유효성 검사 메서드
@@ -81,6 +82,14 @@ public class EditMemberController extends HttpServlet {
 		String regex = "^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,})$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(pass);
+		return matcher.matches();
+	}
+	// 핸드폰 번호 입력 유효성 메서드
+	private boolean isValidPhone(String phone) {
+		// 휴대폰 번호는 010으로 시작한 11자리여야 한다.
+		String regex = "^010-[0-9]{4}-[0-9]{4}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(phone);
 		return matcher.matches();
 	}
 	
